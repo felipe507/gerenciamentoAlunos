@@ -89,11 +89,12 @@ class Alunos extends BaseController
             'cpf' =>  $cpf
         ];
         if($id != null) {
-            $model->update($id,$data);
-            return redirect()->to( base_url('/aluno/editar/' . $id) );
+            $model->where('alunos_id', $id)->delete();
+            $model->save($data);
+            return redirect()->to( base_url('/'));
         } else{
             $model->save($data);
-            return redirect()->to('/');
+            return redirect()->to(base_url('/'));
         }
        
     }

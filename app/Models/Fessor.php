@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AlunosModel extends Model
+class Fessor extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'alunos';
+    protected $table                = 'fessors';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;

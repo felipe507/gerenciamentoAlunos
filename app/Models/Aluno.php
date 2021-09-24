@@ -6,12 +6,15 @@ use CodeIgniter\Model;
 class Aluno extends Model
 {
     protected $table = 'alunos';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_alunos';
     protected $allowedFields = ['nome', 'email', 'cpf', 'telefone'];
     protected $useTimestamps = false;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $DBGroup              = 'default';
+    protected $useAutoIncrement     = true;
+    protected $insertID             = 0;
+    protected $returnType           = 'array';
+    protected $useSoftDeletes       = false;
+    protected $protectFields        = true;
     
     public function getAlunos($id = null) {
         if ($id == null) {

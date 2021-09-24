@@ -18,7 +18,6 @@ class Alunos extends BaseController
 
     public function create()
     {
-        $model = new AlunoModels();
         if ($this->request->getMethod() === 'post' && $this->validate([
             'nome' => 'required|min_length[4]|max_length[40]',
             'email' => 'required',
@@ -48,6 +47,24 @@ class Alunos extends BaseController
         return view('alunos/editar',['data' => $data]);
     }
 
+    public function update()
+    {   
+        if ($this->request->getMethod() === 'post' && $this->validate([
+            'nome' => 'required|min_length[4]|max_length[40]',
+            'email' => 'required',
+            'cpf' => 'required|min_length[8]',
+            'telefone' => 'required' 
+        ])) {
+            $nome = $this->request->getPost('nome');
+            $email = $this->request->getPost('email');
+            $telefone = $this->tirarCaracteresEspeciais($this->request->getPost('telefone'));
+            $cpf = $this->tirarCaracteresEspeciais( $this->request->getPost('cpf'));
+            $id =  $this->request->getPost('id');
+            return $this->salvar($nome, $email, $telefone, $cpf,  $id);
+        }
+
+    }
+
     function tirarCaracteresEspeciais($string) {
         $string = utf8_encode($string);
         $string = trim($string);
@@ -64,7 +81,6 @@ class Alunos extends BaseController
 
     public function salvar($nome, $email, $telefone, $cpf, $id = null)
     {   
-        var_dump($nome, $email, $telefone, $cpf);exit;
         $model = new AlunoModels();
         $data = [
             'nome' => $nome,
@@ -74,10 +90,12 @@ class Alunos extends BaseController
         ];
         if($id != null) {
             $model->update($id,$data);
+            return redirect()->to( base_url('/aluno/editar/' . $id) );
         } else{
             $model->save($data);
+            return redirect()->to('/');
         }
-        return redirect()->to('/');
+       
     }
 
 

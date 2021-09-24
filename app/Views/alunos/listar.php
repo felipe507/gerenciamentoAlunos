@@ -50,7 +50,7 @@
                           </button>
                         </form>
                         <form method="post" action="<?php echo (base_url() . '/aluno/editar/' . $aluno["alunos_id"]) ?>">  
-                          <button  class="btn btn-info btn-sm mr-1" data-toggle="modal" data-target="#editarModal" onclick="setaDadosModal('<?php $aluno['alunos_id']?>')">
+                          <button  class="btn btn-info btn-sm mr-1" data-toggle="modal" data-target="#editarModal">
                             <i class="fas fa-edit"></i>
                           </button>
                         </form>

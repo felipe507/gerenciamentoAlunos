@@ -10,7 +10,7 @@ class AddAluno extends Migration
         {
                 $this->forge->addField([
                         'alunos_id'          => [
-                                'type'           => 'INT',
+                                'type'           => INT'',
                                 'constraint'     => 5,
                                 'unsigned'       => true,
                                 'auto_increment' => true,

@@ -35,7 +35,7 @@ $routes->setAutoRoute(true);
 $routes->post('/aluno/adicionar', 'Alunos::create');
 $routes->post('aluno/delete/(:num)', 'Alunos::delete/$1');
 $routes->post('aluno/editar/(:num)',  'Alunos::edit/$1');
-$routes->post('aluno/salvar/(:num)',  'Alunos::salvar/$1');
+$routes->post('aluno/atualizar/(:num)',  'Alunos::update/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

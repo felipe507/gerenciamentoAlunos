@@ -20,17 +20,18 @@ class Alunos extends BaseController
     {
         $model = new AlunoModels();
         if ($this->request->getMethod() === 'post' && $this->validate([
-            'nome' => 'required|min_length[3]|max_length[120]'
+            'nome' => 'required|min_length[4]|max_length[40]',
+            'email' => 'required',
+            'cpf' => 'required|min_length[8]',
+            'telefone' => 'required' 
         ])) {
-            $model->save([
-                'nome' => $this->request->getPost('nome'),
-                'email'  => $this->request->getPost('email'),
-                'telefone'  => $this->request->getPost('telefone'),
-                'cpf' => $this->request->getPost('cpf')
-            ]);
+            $nome = $this->request->getPost('nome');
+            $email = $this->request->getPost('email');
+            $telefone = $this->tirarCaracteresEspeciais($this->request->getPost('telefone'));
+            $cpf = $this->tirarCaracteresEspeciais( $this->request->getPost('cpf'));
+            return $this->salvar($nome, $email, $telefone, $cpf);
         }
-        
-    return redirect()->to('/');
+    
     }
 
     public function delete($id = null)
@@ -46,5 +47,39 @@ class Alunos extends BaseController
         echo view('layout/layout');
         return view('alunos/editar',['data' => $data]);
     }
+
+    function tirarCaracteresEspeciais($string) {
+        $string = utf8_encode($string);
+        $string = trim($string);
+        $string = str_replace(' ', '', $string);
+        $string = str_replace('_', '', $string);
+        $string = str_replace('/', '', $string);
+        $string = str_replace('-', '', $string);
+        $string = str_replace('(', '', $string);
+        $string = str_replace(')', '', $string);
+        $string = str_replace('.', '', $string);
+        return $string;
+    }
+
+
+    public function salvar($nome, $email, $telefone, $cpf, $id = null)
+    {   
+        var_dump($nome, $email, $telefone, $cpf);exit;
+        $model = new AlunoModels();
+        $data = [
+            'nome' => $nome,
+            'email'  => $email,
+            'telefone'  => $telefone,
+            'cpf' =>  $cpf
+        ];
+        if($id != null) {
+            $model->update($id,$data);
+        } else{
+            $model->save($data);
+        }
+        return redirect()->to('/');
+    }
+
+
 
 }

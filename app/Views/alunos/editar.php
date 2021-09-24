@@ -1,4 +1,4 @@
-        <form method="post" action="<?php echo base_url().'/aluno/editar'?>">
+        <form method="post" action="<?php echo base_url().'/aluno/salvar/'.  $data['aluno']['alunos_id']?>">
         <?= csrf_field() ?>
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -9,9 +9,10 @@
                 </button>
               </div>
                 <div class="modal-body">
-                    <input class="form-control" value="<?php var_dump($data['aluno']); ?>" type="number" placeholder="Telefone">
-                    <input class="form-control" value="<?php var_dump($data['aluno'])?>" type="email" placeholder="Email">
-                    <input class="form-control" value="<?php var_dump($data['aluno'])?>" type="number" placeholder="CPF">
+                    <input class="form-control" value="<?php echo $data['aluno']['nome']?>" type="string" placeholder="CPF">
+                    <input class="form-control" value="<?php echo $data['aluno']['telefone']; ?>" type="string" placeholder="Telefone">
+                    <input class="form-control" value="<?php echo $data['aluno']['email']?>" type="email" placeholder="Email">
+                    <input class="form-control" value="<?php echo $data['aluno']['cpf']?>" type="number" placeholder="CPF">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

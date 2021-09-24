@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="<?php echo base_url() ?>">Home <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" class="btn btn-primary" type="submit" data-toggle="modal" data-target="#myModal">Adicionar</a>
@@ -29,7 +29,32 @@
           </ul>
         </div>
     </nav>
-
+  <!-- Modal Adicionar -->
+  <div class="modal" tabindex="-1" role="dialog" id="myModal">
+        <form method="post" action="<?php echo base_url().'/aluno/adicionar'?>">
+        <?= csrf_field() ?>
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Adicionar um aluno novo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                <div class="modal-body">
+                    <input class="form-control" name="nome" type="text" placeholder="Digite o nome">
+                    <input class="form-control" name="telefone" type="number" placeholder="Telefone">
+                    <input class="form-control" name="email" type="email" placeholder="Email">
+                    <input class="form-control" name="cpf" type="number" placeholder="CPF">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" name="submit" class="btn btn-primary">Adicionar</button>
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
 
 
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->

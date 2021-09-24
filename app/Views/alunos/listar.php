@@ -1,4 +1,5 @@
-    <hr>
+
+  <hr>
     <div class="container-fluid text-center">
       <div class="row">
         <div class="col-8">          
@@ -42,13 +43,17 @@
                         <?php echo $aluno["cpf"] ?>
                       </td>
                    
-                      <td class="d-flex">    
-                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#excluirModal">
-                          <i class="far fa-trash-alt"></i>
-                        </button>
-                        <button class="btn btn-info btn-sm mr-1" data-toggle="modal" data-target="#editarModal">
-                          <i class="fas fa-edit"></i>
-                        </button>
+                      <td class="d-flex">  
+                        <form method="post" action="<?php echo (base_url() . '/aluno/delete/' . $aluno["alunos_id"]) ?>">  
+                          <button type="submit" name="submit"  class="btn btn-danger btn-sm">
+                            <i class="far fa-trash-alt"></i>
+                          </button>
+                        </form>
+                        <form method="post" action="<?php echo (base_url() . '/aluno/editar/' . $aluno["alunos_id"]) ?>">  
+                          <button  class="btn btn-info btn-sm mr-1" data-toggle="modal" data-target="#editarModal" onclick="setaDadosModal('<?php $aluno['alunos_id']?>')">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                        </form>
                       </td>
                     </tr>
                     <?php endforeach?>
@@ -65,33 +70,6 @@
     
       </div>
      
-
-      <!-- Modal Adicionar -->
-      <div class="modal" tabindex="-1" role="dialog" id="myModal">
-        <form method="post" action="<?php echo base_url().'/aluno/adicionar'?>">
-        <?= csrf_field() ?>
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Adicionar um aluno novo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-                <div class="modal-body">
-                    <input class="form-control" name="nome" type="text" placeholder="Digite o nome">
-                    <input class="form-control" name="telefone" type="number" placeholder="Telefone">
-                    <input class="form-control" name="email" type="email" placeholder="Email">
-                    <input class="form-control" name="cpf" type="number" placeholder="CPF">
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button type="submit" name="submit" class="btn btn-primary">Adicionar</button>
-                </div>
-            </div>
-          </div>
-        </form>
-      </div>
 
       <!-- Modal Excluir -->
       <div class="modal" tabindex="-1" role="dialog" id="excluirModal">
@@ -111,29 +89,4 @@
         </div>
       </div>
 
-       <!-- Modal Editar -->
-       <div class="modal" tabindex="-1" role="dialog" id="editarModal">
-        <form method="post" action="<?php echo base_url().'/aluno/editar'?>">
-        <?= csrf_field() ?>
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Editar Aluno</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-                <div class="modal-body">
-                    <input class="form-control" name="nome" type="text" placeholder="Digite o nome">
-                    <input class="form-control" name="telefone" type="number" placeholder="Telefone">
-                    <input class="form-control" name="email" type="email" placeholder="Email">
-                    <input class="form-control" name="cpf" type="number" placeholder="CPF">
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button type="submit" name="submit" class="btn btn-primary">Salvar</button>
-                </div>
-            </div>
-          </div>
-        </form>
-      </div>
+  

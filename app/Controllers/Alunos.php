@@ -15,20 +15,6 @@ class Alunos extends BaseController
         return view('alunos/listar', ['data' => $data]);
     }
 
-    public function showme($page = "home")
-    {
-     if (!is_file(APPPATH. '/Views/pages' . $page . '.php')) {
-         throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
-     } 
-
-     $data['title'] = ucfirst($page);
-    
-     echo view('layout/layout', $data);
-     echo view('page/' . $page, $data);
-     echo view('layout/layout');
-     echo view('layout/home');
-
-    }
 
     public function create()
     {
@@ -43,17 +29,22 @@ class Alunos extends BaseController
                 'cpf' => $this->request->getPost('cpf')
             ]);
         }
+        
+    return redirect()->to('/');
     }
 
-    public function delete()
-    {
-        return view('layout/layout');
+    public function delete($id = null)
+    {   $model = new AlunoModels();
+		$data['user'] = $model->where('alunos_id', $id)->delete();
+		return redirect()->to( base_url('/') );
     }
 
-    public function editar()
-    {
-        return view('layout/layout');
+    public function edit($id = null)
+    {  
+        $model = new AlunoModels();
+        $data['aluno']= $model->getAlunos($id);
+        echo view('layout/layout');
+        return view('alunos/editar',['data' => $data]);
     }
-
 
 }
